@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
-const UserOtpVerification = require("../models/UserOtpVerification");
+const UserOtpVerification = require("../models/UserOTPVerification");
 const VerifiedUser = require("../models/VerifiedUser");
 const UserSession = require("../models/UserSession");
 const Subscription = require("../models/Subscription");
