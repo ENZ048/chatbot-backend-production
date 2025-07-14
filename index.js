@@ -4,9 +4,17 @@ const dotenv = require("dotenv");
 const chatRoutes = require("./routes/chatRoutes");
 const contextRoutes = require("./routes/contextRoutes");
 const connectDB = require('./db');
+const path = require('path');
+const fs = require("fs");
 
 dotenv.config();
 const app = express();
+
+console.log("Serving static files from:", path.join(__dirname, "public/chatbot-loader"));
+const staticPath = path.join(__dirname, "public/chatbot-loader");
+console.log("Does loader.js exist at that path?", fs.existsSync(path.join(staticPath, "loader.js")));
+
+app.use("/chatbot-loader", express.static(staticPath));
 
 connectDB();
 
@@ -26,7 +34,12 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+console.log("Serving static files from:", path.join(__dirname, 'public/widget'));
+
+
 app.use(express.json());
+
+app.use('/widget', express.static(path.join(__dirname, 'public/widget')));
 
 app.use("/api/chat", chatRoutes);
 app.use("/api/context", contextRoutes);
@@ -51,6 +64,10 @@ app.use("/api/plans", planRoutes);
 
 const testWeeklyRoutes = require("./routes/test-weekly-report");
 app.use("/api/test", testWeeklyRoutes);
+
+
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
