@@ -3,7 +3,7 @@
     const chatbotId = scriptTag.getAttribute("chatbot-id");
     const sessionId = localStorage.getItem("chatbot_session_id") || crypto.randomUUID();
     localStorage.setItem("chatbot_session_id", sessionId);
-    const apiBase = "https://api.0804.in/api";
+    const apiBase = "http://13.204.42.62:5000/api";
 
     const CHATBOT_NAME = "Supa Agent";
     const GREETING_MESSAGE = "Hi there! 👋 I'm your virtual assistant. How can I help you today?";
